@@ -25,7 +25,6 @@
         </div>
     </section>
 
-    <!-- Brands Strip (Simulasi Toko Mitra) -->
     <div class="bg-black py-4 d-flex flex-wrap justify-content-center gap-5 text-white opacity-75">
         <h5 class="mb-0">SONY</h5><h5 class="mb-0">APPLE</h5><h5 class="mb-0">IKEA</h5><h5 class="mb-0">CANON</h5><h5 class="mb-0">SAMSUNG</h5>
     </div>

@@ -12,7 +12,6 @@
 @endsection
 
 @push('scripts')
-    <!-- Modal Simulasi Pembayaran -->
     <div class="modal fade" id="paymentModal" data-bs-backdrop="static" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -62,8 +61,8 @@
                         `<span class="badge bg-success mb-2" style="font-size: 0.7rem;">Sisa: ${p.stock}</span>`;
                 } else {
                     stockBadge = `<span class="badge bg-danger mb-2" style="font-size: 0.7rem;">Out of Stock</span>`;
-                    clickEvent = ''; // Matikan klik detail
-                    cardStyle = 'opacity: 0.5; filter: grayscale(100%);'; // Bikin buram
+                    clickEvent = '';
+                    cardStyle = 'opacity: 0.5; filter: grayscale(100%);';
                 }
 
                 return `
@@ -120,11 +119,9 @@
             const p = products.find(x => x.id === curPid);
             if (!p) return;
 
-            // Cek apakah barang sudah ada di keranjang sebelumnya
             const ex = cart.find(x => x.id === curPid);
             const currentCartQty = ex ? ex.qty : 0;
 
-            // Validasi total keranjang vs sisa stok
             if (currentCartQty + curQty > p.stock) {
                 alert(
                     `Gagal! Sisa stok hanya ${p.stock} unit. Anda sudah memasukkan ${currentCartQty} unit ke dalam keranjang.`
@@ -143,8 +140,6 @@
 
             updateBadge();
             alert("Berhasil masuk keranjang belanja!");
-
-            // Tutup modal detail secara otomatis (opsional biar rapi)
             switchView('home');
         }
 
@@ -200,7 +195,6 @@
             document.getElementById('c-total').innerText = "Rp " + total.toLocaleString('id-ID');
         }
 
-        // --- AUTHENTICATION & UI ---
         const authModalEl = document.getElementById('authModal');
         let authModal;
         if (typeof bootstrap !== 'undefined' && authModalEl) {
@@ -329,19 +323,16 @@
             const warn = document.getElementById('auth-warning');
             if (warn) warn.classList.toggle('d-none', user !== null);
 
-            fetchOrderHistory(); // Refresh riwayat kalau user ganti/logout
+            fetchOrderHistory();
         }
 
-        let currentOrderId = null; // Variabel penampung ID pesanan yang sedang diproses
-        let paymentModal; // Variabel untuk modal Bootstrap
+        let currentOrderId = null;
+        let paymentModal;
 
-        // Inisialisasi modal saat web diload
         window.addEventListener('DOMContentLoaded', () => {
-            // ... (kode load user sebelumnya)
             paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
         });
 
-        // --- UBAH FUNGSI CHECKOUT ---
         async function checkout() {
             if (!user) {
                 alert("Silakan login!");
@@ -378,15 +369,12 @@
 
                 hideEAI();
 
-                // Simpan ID pesanan dari response Aul
                 currentOrderId = result.data.id;
 
-                // Kosongkan keranjang
                 cart = [];
                 renderCart();
                 updateBadge();
 
-                // Tampilkan Modal Pembayaran
                 document.getElementById('pay-inv').innerText = 'INV-' + currentOrderId;
                 document.getElementById('pay-total').innerText = 'Rp ' + orderData.total_price.toLocaleString('id-ID');
                 paymentModal.show();
@@ -397,7 +385,6 @@
             }
         }
 
-        // --- FUNGSI BARU UNTUK BAYAR/BATAL ---
         async function processPayment(newStatus) {
             showEAI("Memperbarui Status...", `PUT /api/orders/${currentOrderId}/status`);
 
@@ -424,7 +411,6 @@
                     alert("Pesanan berhasil dibatalkan.");
                 }
 
-                // Refresh data terbaru
                 if (typeof fetchProducts === "function") fetchProducts();
                 if (typeof fetchOrderHistory === "function") fetchOrderHistory();
                 switchView('home');
@@ -518,11 +504,9 @@
             } catch (error) {
                 console.error("Error Fetching Data:", error);
                 hideEAI();
-                // Tidak perlu dimunculkan alert terus-menerus jika API belum siap
             }
         }
 
-        // Menjalankan fungsi otomatis saat website dimuat
         window.addEventListener('DOMContentLoaded', () => {
             const savedUser = localStorage.getItem('user_data');
             if (savedUser) {

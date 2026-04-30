@@ -8,14 +8,12 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // Fungsi untuk Register
     public function register(Request $request)
     {
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-            // Ubah validasi role agar hanya menerima nilai enum yang diizinkan
             'role' => 'required|in:user,penjual,admin'
         ]);
 
@@ -32,7 +30,6 @@ class AuthController extends Controller
         ], 201);
     }
 
-    // Fungsi untuk Login
     public function login(Request $request)
     {
         $request->validate([
@@ -42,7 +39,6 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        // Cek apakah user ada dan passwordnya cocok
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
                 'message' => 'Email atau password salah!'
@@ -52,7 +48,7 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Berhasil login',
             'user' => $user,
-            'token' => 'dummy-token-sementara' // Token disimulasikan dulu
+            'token' => 'dummy-token-sementara'
         ], 200);
     }
 }

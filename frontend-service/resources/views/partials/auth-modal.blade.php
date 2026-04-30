@@ -1,4 +1,4 @@
-<!-- Modal Auth -->
+
 <div class="modal fade" id="authModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -16,7 +16,7 @@
             <div class="modal-body px-4 pb-4">
                 <div class="tab-content" id="auth-pills-tabContent">
 
-                    <!-- Form Login -->
+
                     <div class="tab-pane fade show active" id="pills-login" role="tabpanel">
                         <h4 class="fw-bold text-center mb-4">Selamat Datang Kembali</h4>
                         <form onsubmit="handleLogin(event)">
@@ -32,7 +32,7 @@
                         </form>
                     </div>
 
-                    <!-- Form Register -->
+
                     <div class="tab-pane fade" id="pills-register" role="tabpanel">
                         <h4 class="fw-bold text-center mb-4">Buat Akun Baru</h4>
                         <form onsubmit="handleRegister(event)">

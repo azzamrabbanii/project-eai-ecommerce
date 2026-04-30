@@ -8,22 +8,18 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
-    // GET all products
     public function index(Request $request)
     {
     $query = Product::query();
 
-    // Search by name
     if ($request->has('search')) {
         $query->where('name', 'like', '%' . $request->search . '%');
     }
 
-    // Filter by condition
     if ($request->has('condition')) {
         $query->where('condition', $request->condition);
     }
 
-    // Filter by price
     if ($request->has('min_price')) {
         $query->where('price', '>=', $request->min_price);
     }
@@ -37,13 +33,11 @@ class ProductController extends Controller
     );
     }
 
-    // GET product by ID
     public function show($id)
     {
         return Product::findOrFail($id);
     }
 
-    // CREATE product
     public function store(Request $request)
     {
     $validator = Validator::make($request->all(), [
@@ -66,7 +60,6 @@ class ProductController extends Controller
     return response()->json($product, 201);
 }
 
-    // UPDATE product
     public function update(Request $request, $id)
     {
     $product = Product::findOrFail($id);
@@ -84,7 +77,6 @@ class ProductController extends Controller
     return response()->json($product);
     }
 
-    // DELETE product
     public function destroy($id)
     {
         Product::destroy($id);

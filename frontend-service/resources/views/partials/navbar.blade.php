@@ -28,16 +28,12 @@
                     <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem; display:none;">0</span>
                 </i>
 
-                <!-- BAGIAN PROFIL & DROPDOWN YANG BARU -->
                 <div class="dropdown ms-3">
-                    <!-- Elemen yang di-klik (Ikon + Nama) -->
                     <div class="d-flex align-items-center" id="user-trigger" onclick="openAuthModal()" style="cursor: pointer;">
                         <i class="bi bi-person-circle fs-4" id="user-icon"></i>
-                        <!-- Tempat nama muncul di navbar (default disembunyikan pakai d-none) -->
                         <span id="navbar-user-name" class="ms-2 fw-bold text-dark d-none" style="font-size: 0.9rem;"></span>
                     </div>
 
-                    <!-- Isi Dropdown Menu -->
                     <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-3 rounded-4 py-2" id="user-menu">
                         <li class="px-4 py-2 bg-light mx-2 rounded-3 mb-2">
                             <span class="d-block fw-bold text-dark" id="user-name-display" style="font-family: 'Inter', sans-serif; text-transform: none; font-size: 0.95rem;"></span>
