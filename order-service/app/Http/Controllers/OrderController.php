@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Http;
 
 class OrderController extends Controller
 {
-    private $productServiceUrl = 'http://localhost:8001';
-    private $userServiceUrl    = 'http://localhost:8002';
+    private $productServiceUrl = 'http://127.0.0.1:8002';
+    private $userServiceUrl    = 'http://127.0.0.1:8001';
 
     /**
      * POST /api/orders
